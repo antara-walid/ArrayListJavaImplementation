@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.ObjectInput;
+import java.util.Arrays;
 import java.util.List;
 
 public class MyArrayList<T> {
@@ -24,39 +25,34 @@ public class MyArrayList<T> {
     public void add(Object item) {
         size++;
         if (size <= capacity) {
-            internalArray[size-1] = item;
-        }
-        else
-        {
+            internalArray[size - 1] = item;
+        } else {
             // placing the internal array values in another array
             Object[] secondInternalArray = new Object[capacity];
-            for(int i = 0 ; i < capacity ; i++)
-            {
+            for (int i = 0; i < size -1 ; i++) {
                 secondInternalArray[i] = internalArray[i];
             }
 
             // creating new Array whit double the size
-            internalArray = new Object[capacity * 2]; // in this example the resizing factor is 2
+            capacity = capacity * 2;
+            internalArray = new Object[capacity]; // in this example the resizing factor is 2
 
             // inserting the old data in the new array
-            for(int i = 0 ; i < capacity ; i++)
-            {
-                 internalArray[i] = secondInternalArray[i];
+            for (int i = 0; i < size -1; i++) {
+                internalArray[i] = secondInternalArray[i];
             }
 
             // inserting the item
-            internalArray[size-1] = item;
+            internalArray[size - 1] = item;
         }
 
     }
 
     // get methode
 
-    public T get(int index)
-    {
+    public T get(int index) {
         return (T) internalArray[index]; // casting
     }
-
 
 
     // getters and setters
@@ -84,4 +80,6 @@ public class MyArrayList<T> {
     public void setSize(int size) {
         this.size = size;
     }
+
+
 }
